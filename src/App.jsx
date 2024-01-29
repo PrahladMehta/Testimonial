@@ -1,12 +1,56 @@
-import "./App.css";
+import data from "./data.js";
+import Testomonial from "./component/Testomonial.js"
+import {useState} from "react";
 
 function App() {
+
+  const review=data;
+
+  const [index,setIndex]= useState(0);
+
+  function Increment(){
+
+       if(index+1<review.length){
+        
+        setIndex(index+1);
+       }else{
+        setIndex(0);
+       }
+  }
+
+  function Decrement(){
+
+       if(index-1<0){
+        setIndex(review.length-1);
+       }else{
+        setIndex(index-1);
+       }
+  }
+
+  function Random(){
+      
+        let random=Math.floor(Math.random()*review.length);
+        setIndex(random);
+  }
+   
   return (
-    <main className="flex justify-center gap-4 flex-col min-h-screen">
-      <h1 className="text-3xl text-center font-bold underline">React & Tailwind CSS Starter Pack</h1>
-      <p className="text-center text-xl">This is a starter pack for React & Tailwind CSS projects.</p>
-      <img src="https://bit.ly/3wsmzTy" alt="meme" className="mx-auto" />
-    </main>
+
+
+   <div className="w-[100vw] h-[100vh] overflow-hidden bg-gray-200 flex justify-center items-center">
+
+   
+   <div className="h-auto w-auto">
+
+      <div>
+        <h1 className="text-center text-3xl font-bold ">Our Testimonials</h1>
+        <div className="bg-purple-500 w-[130px] h-1 rounded-sm m-auto mt-1"></div>
+      </div>
+
+      <Testomonial review={review[index]} Increment={Increment}  Decrement={Decrement} Random={Random}></Testomonial>
+    
+      </div>
+     
+   </div>
   );
 }
 
